@@ -422,8 +422,11 @@ if st.button("Analyze Ticket"):
             analysis["action"]
         )
             
-        st.subheader("AI Suggested Response")
-
+        st.markdown("### 🤖 AI Suggested Response")
+        st.caption(
+            "Generated using retrieved support knowledge and a hosted language model"
+        )
+        
         st.write(
             rag_result["response"]
         )
