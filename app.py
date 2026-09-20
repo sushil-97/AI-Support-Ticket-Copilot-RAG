@@ -378,7 +378,7 @@ if st.button("Analyze Ticket"):
 
     if ticket_text.strip():
 
-        prediction = predict_ticket(ticket_text)
+        analysis = analyze_ticket(ticket_text)
 
         with st.spinner("Generating AI support response..."):
             rag_result = generate_rag_response(ticket_text)
@@ -392,13 +392,13 @@ if st.button("Analyze Ticket"):
         with col1:
             st.metric(
                 "Category",
-                prediction["category"].title()
+                analysis["category"].title()
             )
 
         with col2:
             st.metric(
                 "Urgency",
-                prediction["urgency"].title()
+                analysis["urgency"].title()
             )
             
         st.subheader("AI Suggested Response")
