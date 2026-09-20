@@ -416,9 +416,9 @@ if st.button("Analyze Ticket"):
                 analysis["queue"]
             )
         
-        st.subheader("Recommended Action")
-        
-        st.info(
+        st.markdown("### ⚡ Recommended Action")
+
+        st.success(
             analysis["action"]
         )
             
