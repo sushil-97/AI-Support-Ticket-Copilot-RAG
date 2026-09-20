@@ -253,6 +253,55 @@ def load_ml_models():
 ) = load_ml_models()
 
 def predict_ticket(ticket_text):
+    priority_mapping = {
+    "high": "P1",
+    "medium": "P2",
+    "low": "P3"
+}
+
+queue_mapping = {
+    "billing": "Billing & Payments",
+    "bug": "Technical Support",
+    "refund": "Returns & Exchanges",
+    "other": "General Support"
+}
+
+action_mapping = {
+    "P1": "Escalate immediately and notify the technical team.",
+    "P2": "Assign to the relevant support team for prompt review.",
+    "P3": "Add to the normal support queue."
+}
+
+
+def analyze_ticket(ticket_text):
+
+    prediction = predict_ticket(ticket_text)
+
+    category = prediction["category"]
+    urgency = prediction["urgency"]
+
+    priority = priority_mapping.get(
+        urgency,
+        "P2"
+    )
+
+    queue = queue_mapping.get(
+        category,
+        "General Support"
+    )
+
+    action = action_mapping.get(
+        priority,
+        "Assign to the support team for review."
+    )
+
+    return {
+        "category": category,
+        "urgency": urgency,
+        "priority": priority,
+        "queue": queue,
+        "action": action
+    }
 
     # Category prediction
     category_features = category_vectorizer.transform(
