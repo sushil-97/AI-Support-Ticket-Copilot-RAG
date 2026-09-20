@@ -202,7 +202,7 @@ Important:
 
     response = completion.choices[0].message.content
 
-    return {
+return {
         "response": response,
         "retrieved_documents": relevant_docs
     }
