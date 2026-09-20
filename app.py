@@ -4,6 +4,16 @@ import torch
 from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from sklearn.metrics.pairwise import cosine_similarity
+from huggingface_hub import InferenceClient
+
+@st.cache_resource
+def load_hf_client():
+    return InferenceClient(
+        token=st.secrets["HF_TOKEN"]
+    )
+
+
+hf_client = load_hf_client()
 
 support_documents = [
     """
