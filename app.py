@@ -194,6 +194,12 @@ Important:
   say that the team "should investigate" or "the next step is for
   the team to investigate".
 - Do not invent any information.
+- Preserve conditional language from the support information.
+- If the support information says "if", "should", or "may",
+  do not rewrite it as something that has already happened.
+- Never claim verification, confirmation, approval, investigation,
+  escalation, or refund processing unless the customer issue or
+  support information explicitly says it has already occurred.
 """
         }
     ]
