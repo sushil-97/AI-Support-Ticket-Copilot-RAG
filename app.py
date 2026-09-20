@@ -385,7 +385,10 @@ if st.button("Analyze Ticket"):
 
         retrieved_docs = rag_result["retrieved_documents"]
 
-        st.subheader("Ticket Analysis")
+        st.markdown("## 🎯 Ticket Analysis")
+        st.caption(
+            "AI-powered classification, prioritization, and support routing"
+        )
 
         col1, col2, col3, col4 = st.columns(4)
         
