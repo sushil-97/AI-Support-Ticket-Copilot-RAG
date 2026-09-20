@@ -432,7 +432,9 @@ if st.button("Analyze Ticket"):
         )
         st.markdown("### 📚 Retrieved Knowledge")
         st.caption(
-            "Support documents selected using semantic similarity"
+            "Support documents selected using semantic similarity. "
+            "Higher similarity scores indicate a closer semantic match to the ticket."
+        )
         )
 
         for i, doc in enumerate(retrieved_docs, start=1):
