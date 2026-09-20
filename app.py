@@ -136,12 +136,18 @@ def generate_rag_response(ticket_text):
         top_k=2
     )
     relevant_docs = [
-    doc for doc in retrieved_docs
-    if doc["score"] >= 0.45
-]
+        doc for doc in retrieved_docs
+        if doc["score"] >= 0.45
+    ]
 
-if not relevant_docs:
-    relevant_docs = [retrieved_docs[0]]
+    if not relevant_docs:
+        if retrieved_docs:
+            relevant_docs = [retrieved_docs[0]]
+        else:
+            return {
+                "response": "I’m sorry, I couldn’t find matching support information for this issue.",
+                "retrieved_documents": []
+            }
 
     # 2. Combine the retrieved documents into context
     context = "\n\n---\n\n".join(
