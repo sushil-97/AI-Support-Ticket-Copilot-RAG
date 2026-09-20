@@ -172,7 +172,14 @@ Write a short and polite response directly to the customer.
 
 Important:
 - Use the information that best matches the customer's question.
-- Do not claim that an action has already been completed.
+- Describe recommended actions as next steps.
+- Never say "we are investigating", "we have investigated",
+  "we have escalated", "we have confirmed", or similar statements
+  unless the support information explicitly states that the action
+  has already happened.
+- If the support information says a team "should investigate",
+  say that the team "should investigate" or "the next step is for
+  the team to investigate".
 - Do not invent any information.
 """
         }
