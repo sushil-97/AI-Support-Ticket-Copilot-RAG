@@ -430,7 +430,10 @@ if st.button("Analyze Ticket"):
         st.write(
             rag_result["response"]
         )
-        st.subheader("Retrieved Knowledge")
+        st.markdown("### 📚 Retrieved Knowledge")
+        st.caption(
+            "Support documents selected using semantic similarity"
+        )
 
         for i, doc in enumerate(retrieved_docs, start=1):
 
