@@ -385,21 +385,39 @@ if st.button("Analyze Ticket"):
 
         retrieved_docs = rag_result["retrieved_documents"]
 
-        st.subheader("ML Predictions")
+        st.subheader("Ticket Analysis")
 
-        col1, col2 = st.columns(2)
-
+        col1, col2, col3, col4 = st.columns(4)
+        
         with col1:
             st.metric(
                 "Category",
                 analysis["category"].title()
             )
-
+        
         with col2:
             st.metric(
                 "Urgency",
                 analysis["urgency"].title()
             )
+        
+        with col3:
+            st.metric(
+                "Priority",
+                analysis["priority"]
+            )
+        
+        with col4:
+            st.metric(
+                "Routing Queue",
+                analysis["queue"]
+            )
+        
+        st.subheader("Recommended Action")
+        
+        st.info(
+            analysis["action"]
+        )
             
         st.subheader("AI Suggested Response")
 
