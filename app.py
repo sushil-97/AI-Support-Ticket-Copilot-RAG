@@ -156,7 +156,6 @@ def generate_rag_response(ticket_text):
                     "When the support information describes what should happen, explain "
                     "that as the next step rather than claiming it has already happened. "
                     "Keep the response short, polite, and professional.")
-            )
         },
         {
             "role": "user",
