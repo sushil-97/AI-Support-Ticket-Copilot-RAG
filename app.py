@@ -146,7 +146,6 @@ def generate_rag_response(ticket_text):
         {
             "role": "system",
             "content": (
-                "content": (
                     "You are a customer support agent. "
                     "Answer the customer using ONLY the provided support information. "
                     "Do not invent policies, timelines, contact details, or actions. "
