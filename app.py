@@ -253,7 +253,32 @@ def load_ml_models():
 ) = load_ml_models()
 
 def predict_ticket(ticket_text):
-    priority_mapping = {
+
+    # Category prediction
+    category_features = category_vectorizer.transform(
+        [ticket_text]
+    )
+
+    category = category_model.predict(
+        category_features
+    )[0]
+
+    # Urgency prediction
+    urgency_features = urgency_vectorizer.transform(
+        [ticket_text]
+    )
+
+    urgency = urgency_model.predict(
+        urgency_features
+    )[0]
+
+    return {
+        "category": category,
+        "urgency": urgency
+    }
+
+
+priority_mapping = {
     "high": "P1",
     "medium": "P2",
     "low": "P3"
