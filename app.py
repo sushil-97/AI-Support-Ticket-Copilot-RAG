@@ -127,6 +127,67 @@ def retrieve_top_documents(ticket_text, top_k=2):
 
     return results
 
+def generate_rag_response(ticket_text):
+
+    # 1. Retrieve the top 2 relevant support documents
+    retrieved_docs = retrieve_top_documents(
+        ticket_text,
+        top_k=2
+    )
+
+    # 2. Combine the retrieved documents into context
+    context = "\n\n---\n\n".join(
+        [result["document"] for result in retrieved_docs]
+    )
+
+    # 3. Create messages for Qwen
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                "You are a customer support agent. "
+                "Answer using ONLY the provided support information. "
+                "Do not invent policies, timelines, contact details, "
+                "or actions that are not stated in the support information. "
+                "Do not claim that an action has already been completed."
+            )
+        },
+        {
+            "role": "user",
+            "content": f"""
+SUPPORT INFORMATION:
+
+{context}
+
+CUSTOMER ISSUE:
+
+{ticket_text}
+
+Write a short and polite response directly to the customer.
+
+Important:
+- Use the information that best matches the customer's question.
+- Do not claim that an action has already been completed.
+- Do not invent any information.
+"""
+        }
+    ]
+
+    # 4. Send the prompt to hosted Qwen
+    completion = hf_client.chat.completions.create(
+        model="Qwen/Qwen2.5-1.5B-Instruct",
+        messages=messages,
+        max_tokens=150,
+        temperature=0
+    )
+
+    response = completion.choices[0].message.content
+
+    return {
+        "response": response,
+        "retrieved_documents": retrieved_docs
+    }
+
 @st.cache_resource
 def load_ml_models():
 
