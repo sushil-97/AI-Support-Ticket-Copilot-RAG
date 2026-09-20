@@ -276,10 +276,10 @@ if st.button("Analyze Ticket"):
 
         prediction = predict_ticket(ticket_text)
 
-        retrieved_docs = retrieve_top_documents(
-            ticket_text,
-            top_k=2
-        )
+        with st.spinner("Generating AI support response..."):
+            rag_result = generate_rag_response(ticket_text)
+
+        retrieved_docs = rag_result["retrieved_documents"]
 
         st.subheader("ML Predictions")
 
@@ -296,7 +296,12 @@ if st.button("Analyze Ticket"):
                 "Urgency",
                 prediction["urgency"].title()
             )
+            
+        st.subheader("AI Suggested Response")
 
+        st.write(
+            rag_result["response"]
+        )
         st.subheader("Retrieved Knowledge")
 
         for i, doc in enumerate(retrieved_docs, start=1):
