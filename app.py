@@ -9,6 +9,7 @@ from huggingface_hub import InferenceClient
 @st.cache_resource
 def load_hf_client():
     return InferenceClient(
+        provider="featherless-ai",
         token=st.secrets["HF_TOKEN"]
     )
 
